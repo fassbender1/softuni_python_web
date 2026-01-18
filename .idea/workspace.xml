@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ceeba847-ba77-4456-9ef1-ffa6a5fa4850" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/SoftUni_Python_Web.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SoftUni_Python_Web.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="ceeba847-ba77-4456-9ef1-ffa6a5fa4850" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -274,7 +269,7 @@
       <workItem from="1768668784331" duration="2315000" />
       <workItem from="1768671118339" duration="1935000" />
       <workItem from="1768673072275" duration="4287000" />
-      <workItem from="1768768161931" duration="5318000" />
+      <workItem from="1768768161931" duration="5823000" />
     </task>
     <servers />
   </component>
