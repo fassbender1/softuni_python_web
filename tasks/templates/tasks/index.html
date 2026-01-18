@@ -1,0 +1,9 @@
+{% if tasks_list %}
+{% for task in tasks_list %}
+<h1>{{ task.title }}</h1>
+<p>{{ task.text }}</p>
+    <p>{{ task.is_completed }}</p>
+{% endfor %}
+{% else %}
+<p>There are no created tasks!</p>
+{% endif %}
