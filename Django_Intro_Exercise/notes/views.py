@@ -7,7 +7,7 @@ from notes.models import Note
 # Create your views here.
 
 def dashboard(request) -> HttpResponse:
-    notes = Note.objects.all()
+    notes = Note.objects.prefetch_related('category').all()
 
     context = {
         'notes': notes

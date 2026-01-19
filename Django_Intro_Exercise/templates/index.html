@@ -5,10 +5,15 @@
     <title>TODO App</title>
 </head>
 <body>
+    <nav>
+        <a href="{% url 'dashboard' %}">Home</a>
+        <a href="{% url 'list-categories' %}">Categories</a>
+    </nav>
     {% for note in notes %}
         <li>
             <h2>{{ note.title }}</h2>
             <p>{{ note.body }}</p>
+            <p>Category: {{ note.category|default:"No Category" }}</p>
         </li>
     {% empty %}
         <h1>No notes yet</h1>
