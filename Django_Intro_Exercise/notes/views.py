@@ -7,4 +7,10 @@ from notes.models import Note
 # Create your views here.
 
 def dashboard(request) -> HttpResponse:
-    return HttpResponse("This is my first View!")
+    notes = Note.objects.all()
+
+    context = {
+        'notes': notes
+    }
+
+    return render(request, 'index.html', context)

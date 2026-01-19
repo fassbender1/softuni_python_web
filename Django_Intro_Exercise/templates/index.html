@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TODO App</title>
+</head>
+<body>
+    {% for note in notes %}
+        <li>
+            <h2>{{ note.title }}</h2>
+            <p>{{ note.body }}</p>
+        </li>
+    {% empty %}
+        <h1>No notes yet</h1>
+    {% endfor %}
+</body>
+</html>
