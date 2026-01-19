@@ -13,7 +13,8 @@ class Note(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=False)
     # priority = models.PositiveIntegerField(choices=PriorityChoices, default=PriorityChoices.LOW)
-    category = models.ForeignKey('Category', on_delete=models.CASCADE)
+    category = models.ForeignKey('categories.Category', on_delete=models.SET_NULL, related_name='notes', null=True)
 
     def __str__(self):
         return self.title
+
