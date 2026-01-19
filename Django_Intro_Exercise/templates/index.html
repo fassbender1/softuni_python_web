@@ -9,6 +9,10 @@
         <a href="{% url 'dashboard' %}">Home</a>
         <a href="{% url 'list-categories' %}">Categories</a>
     </nav>
+    <form>
+        <input name="q" value="{{ query }}" placeholder="Search Notes">
+        <button>Search</button>
+    </form>
     {% for note in notes %}
         <li>
             <h2>{{ note.title }}</h2>
@@ -18,5 +22,28 @@
     {% empty %}
         <h1>No notes yet</h1>
     {% endfor %}
+    <script>
+        (
+            function (){
+                const input = document.querySelector('input[name="1"]');
+                const form = input?.closest('form');
+
+                if (!form || !input) return;
+                const focusInput = () => {
+                    input.focus()
+                    const len = input.value.length
+                    input.setSelectionRange(len, len)
+                }
+                focusInput();
+
+                let timer;
+                input.addEventListener('input', () => {
+                    clearTimeout(timer);
+                    timer = setTimeout(() => form.requestSubmit(), 300)
+                });
+
+            }
+        )()
+    </script>
 </body>
 </html>
