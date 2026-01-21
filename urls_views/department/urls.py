@@ -1,11 +1,12 @@
 from django.urls import path, re_path, include
 
-from department.views import index, slug_view, path_view, uuid_view, show_archive
+from department.views import index, slug_view, path_view, uuid_view, show_archive, redirect_view
 
 urlpatterns = [
 
     re_path(r'^archive/(?P<archive_year>202[0-4])/$', show_archive),
-
+    path('', index),
+    path('redirect-view/', redirect_view),
     path('department/', include([
         path('<int:id>/', index),
         path('<uuid:uuid>/', uuid_view),
