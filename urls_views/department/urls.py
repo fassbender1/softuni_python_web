@@ -5,10 +5,9 @@ from department.views import index, slug_view, path_view, uuid_view, show_archiv
 urlpatterns = [
 
     re_path(r'^archive/(?P<archive_year>202[0-4])/$', show_archive),
-    path('', index),
+    path('home/<int:pk>/', index, name='home'),
     path('redirect-view/', redirect_view),
     path('department/', include([
-        path('<int:id>/', index),
         path('<uuid:uuid>/', uuid_view),
         path('<slug:slug>/', slug_view),
         path('<id>/', index),
