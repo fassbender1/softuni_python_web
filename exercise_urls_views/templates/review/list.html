@@ -1,22 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ page_title }}</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-    <main>
-        <ul>
-            {% for review in reviews %}
-                <li>
-                    <a href="{% url 'review:detail' review.pk %}">{{ review.author }} - {{ review.rating }}</a>
-                </li>
-            {% empty %}
-                <h1>No reviews yet.</h1>
-            {% endfor %}
-        </ul>
-    </main>
+{% block title %}{{ page_title }}{% endblock %}
 
-</body>
-</html>
+{% block content %}
+    <h1 class="mb-4">{{ page_title }}</h1>
+
+    <div class="list-group">
+        {% for review in reviews %}
+            <a href="{% url 'review:detail' review.pk %}" class="list-group-item list-group-item-action">
+                {{ review.author }} - {{ review.rating }}
+            </a>
+        {% empty %}
+            <p class="list-group-item">No reviews yet.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

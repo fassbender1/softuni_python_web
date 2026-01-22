@@ -7,7 +7,7 @@ from destination.models import Destination
 # Create your views here.
 
 def index(request: HttpRequest) -> HttpResponse:
-    return HttpResponse("Welcome to our travel application!")
+    return render(request, 'index.html')
 
 def destinations_list(request: HttpRequest) -> HttpResponse:
     destinations = Destination.objects.all()

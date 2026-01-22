@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Welcome to Our Travel App
+{% endblock %}
+
+{% block content %}
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">Welcome to Our Travel Application!</h1>
+            <p class="col-md-8 fs-4">
+                Explore the most beautiful destinations around the world. Read reviews from other travelers and plan your next adventure with us.
+            </p>
+            <a href="{% url 'destination:list' %}" class="btn btn-primary btn-lg" role="button">
+                Explore Destinations
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Latest Reviews</h2>
+            <p>See what other travelers are saying about their recent trips.</p>
+            <a href="{% url 'review:list' %}" class="btn btn-secondary" role="button">
+                View Reviews
+            </a>
+        </div>
+        <div class="col-md-6">
+            <h2>Plan Your Trip</h2>
+            <p>Find inspiration for your next journey and create a list of places you want to visit.</p>
+            <a href="{% url 'destination:list' %}" class="btn btn-secondary" role="button">
+                Browse Destinations
+            </a>
+        </div>
+    </div>
+{% endblock %}
