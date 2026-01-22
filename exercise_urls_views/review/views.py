@@ -33,10 +33,10 @@ def review_detail(request: HttpRequest, pk: int) -> HttpResponse:
     return render(request, 'review/detail.html', context)
 
 def reviews_by_year(request: HttpRequest, year: int) -> HttpResponse:
-    review = Review.objects.filter(created_at__year=year)
+    reviews = Review.objects.filter(created_at__year=year)
     context = {
-        'review': review,
-        'page_title': f'{review.destination.name} for {year}',
+        'reviews': reviews,
+        'page_title': f'Reviews for {year}',
     }
 
-    return render(request, 'review/detail.html', context)
+    return render(request, 'review/list.html', context)
