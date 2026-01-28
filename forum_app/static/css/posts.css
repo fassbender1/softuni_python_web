@@ -1,0 +1,74 @@
+/* static/css/posts.css */
+
+.posts-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.post-card {
+    background-color: var(--white-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+.post-card .post-content {
+    padding: 20px;
+}
+
+.post-card .post-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.post-card .post-meta {
+    font-size: 14px;
+    color: var(--light-text-color);
+    margin-bottom: 15px;
+}
+
+.post-card .post-excerpt {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.post-details {
+    padding: 30px;
+}
+
+.post-details .post-title {
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+.post-details .post-meta {
+    font-size: 16px;
+    color: var(--light-text-color);
+    margin-bottom: 30px;
+}
+
+.post-details .post-body {
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+.comments-section {
+    margin-top: 40px;
+}
+
+.comment {
+    border-top: 1px solid var(--border-color);
+    padding: 20px 0;
+}
+
+.comment:first-child {
+    border-top: none;
+}

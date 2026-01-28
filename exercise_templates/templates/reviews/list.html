@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Recent Reviews{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4">Recent Reviews</h1>
+    <div class="list-group">
+        {% for review in reviews %}
+            <a href="{% url 'reviews:details' review.pk %}" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Review for "{{ review.book.title }}"</h5>
+                    <small>{{ review.created_at|date:"Y-m-d" }}</small>
+                </div>
+                    <p class="mb-1">By {{ review.author }}</p>
+                    <small>Rating: {{ review.rating }} / 5⭐</small>
+
+            </a>
+        {% empty %}
+            <p class="list-group-item">No reviews yet.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

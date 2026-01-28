@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ book.title }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h1 class="card-title">{{ book.title }}</h1>
+        </div>
+        <div class="card-body">
+            <h5 class="card-subtitle mb-2 text-muted">By {{ book.author }}</h5>
+            <p class="card-text">Published on: {{ book.publishing_date }}</p>
+            <p class="card-text"><strong>Rating:</strong> {{ book.average_rating|floatformat:1 }} / 5.0⭐ <small> {{ book.reviews_count  }} reviews</small></p>
+            <p class="card-text">{{ book.description }}</p>
+            <p class="card-text"><u>{{ book.pages }} pages</u></p>
+        </div>
+        <div class="card-footer">
+             <a href="{% url 'books:list' %}" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+
+    <hr class="my-4">
+
+    <h2>Reviews</h2>
+    <div class="list-group">
+        {% for review in book.reviews.all %}
+            <div class="list-group-item">
+                <h5 class="mb-1">{{ review.author }}</h5>
+                <small class="text-muted">Rating: {{ review.rating }} / 5⭐</small>
+                <p class="mb-1">{{ review.body|truncatewords:7 }}</p>
+                <div class="card-footer">
+                    <a href="{% url 'reviews:details' review.pk %}" class="btn btn-primary">View Review</a>
+                </div>
+            </div>
+        {% empty %}
+            <p>No reviews for this book yet.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

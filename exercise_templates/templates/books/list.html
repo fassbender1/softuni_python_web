@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Book List{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4">All Books</h1>
+    <div class="list-group">
+        {% for book in books %}
+            <a href="{% url 'books:details' book.slug %}" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{ book.title }}</h5>
+                    <small>{{ book.publishing_date }}</small>
+                </div>
+                <p class="mb-1">By {{ book.author }}</p>
+                <small>Rating: {{ book.average_rating|floatformat:1 }} / 5⭐</small>
+            </a>
+        {% empty %}
+            <p class="list-group-item">No books found.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

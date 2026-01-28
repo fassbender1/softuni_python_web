@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load markdown_extras %}
+
+{% block content %}
+<div class="posts">
+    <div class="post">
+        <div class="header">
+            <h2>{{ post.title|lower|capfirst }}</h2>
+        </div>
+
+        {% if post.content %}
+            <p>{{ post.content|markdown }}</p>
+        {% else %}
+            <p>{% lorem 3 p %}</p>
+        {% endif %}
+        <span>Posted by {{ post.author|default:'Anonymous' }} on {{ post.created_at|date }}</span>
+    </div>
+</div>
+{% endblock %}

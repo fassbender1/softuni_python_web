@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}Welcome to the Internet Book DB{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="p-5 mb-4 bg-primary-subtle rounded-3">
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">Welcome to the Internet Book Database</h1>
+            <p class="col-md-8 fs-4">Your one-stop destination for information about books. Browse our collection, read reviews, and find your next favorite book.</p>
+            <a href="{% url 'books:list' %}" class="btn btn-primary btn-lg">Browse Books</a>
+        </div>
+    </div>
+
+    <div class="row align-items-md-stretch">
+        <div class="col-md-6">
+            <a href="{% url 'books:top-rated' %}" class="list-group-item list-group-item-action">
+            <div class="h-100 p-5 text-white bg-dark rounded-3">
+                <h2>Highest Rated Books</h2>
+                <p>Check out the books that have received the highest ratings from our users.</p>
+                  {% for book in top_books %}
+                  <li>
+                      <strong>{{ book.title }}</strong><br>
+                      Author: {{ book.author }}<br>
+                      Rating: {{ book.average_rating }} ⭐ <small>{{ book.reviews_count }} reviews</small>
+
+                  </li>
+                  {% empty %}
+                      <li>No books available.</li>
+                  {% endfor %}
+            </div>
+            </a>
+        </div>
+
+        <div class="col-md-6">
+            <div class="h-100 p-5 bg-secondary-subtle border rounded-3">
+                <h2>Recently Published Books</h2>
+                <p>Discover the newest books in our collection.</p>
+                {% if latest_book %}
+                    <h5>{{ latest_book.title }}</h5>
+                    <small>Rating: {{ latest_book.average_rating }} / 5⭐</small>
+                    <p>{{ latest_book.author }}</p>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'books:recently-added' %}" class="btn btn-primary">View Recently added Books</a></li>
+                    </ul>
+                {% else %}
+                    <p>No recently added Books.</p>
+                {% endif %}
+            </div>
+        </div>
+        <p></p>
+        <div class="col-md-6">
+            <div class="h-100 p-5 bg-light border rounded-3">
+                <h2>Recent Reviews</h2>
+                <p>Read the most recent reviews.</p>
+                {% if latest_review %}
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">Review for "{{ latest_review.book.title }}"</h5>
+                        <small>{{ latest_review.created_at|date:"Y-m-d" }}</small>
+                    </div>
+                        <p class="mb-1">By {{ latest_review_author }}</p>
+                        <small>Rating: {{ latest_review_rating }} / 5⭐</small>
+                    <p></p>
+
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'reviews:recent' %}" class="btn btn-primary">View Recent Reviews</a></li>
+                    </ul>
+                {% else %}
+                    <p>No recently added Books.</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="col-md-12">
+                <a href="{% url 'books:top-rated' %}" class="list-group-item list-group-item-action">
+                <div class="h-100 p-5 text-white bg-secondary rounded-3">
+                    <h2>Most Reviewed Books</h2>
+                    <p>Check out the most popular books that have the highest review counts.</p>
+                    {% for book in top_books %}
+                    <li>
+                        <strong>{{ book.title }}</strong><br>
+                        Author: {{ book.author }}<br>
+                        Rating: {{ book.average_rating }} ⭐ <small>{{ book.reviews_count }} reviews</small>
+                    </li>
+                    {% empty %}
+                        <li>No books available.</li>
+                    {% endfor %}
+                </div>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+</div>
