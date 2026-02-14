@@ -17,6 +17,8 @@
         <div class="card-footer">
             <a href="{% url 'books:details' review.book.slug %}" class="btn btn-primary">View Book</a>
             <a href="{% url 'reviews:list_all' %}" class="btn btn-secondary">Back to Reviews</a>
+            <a href="{% url 'reviews:edit' review.pk %}" class="btn btn-warning">Edit</a>
+            <a href="{% url 'reviews:delete' review.pk %}" class="btn btn-danger">Delete</a>
         </div>
     </div>
 </div>

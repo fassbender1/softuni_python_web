@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Review List{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4">All Reviews</h1>
+    <div class="list-group">
+        {% for review in reviews %}
+            <div class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Review by: {{ review.author }} for Book: {{ review.book.title }}</h5>
+                    <small>Rating: {{ review.rating }} / 5⭐</small>
+                </div>
+                <p class="mb-1">{{ review.text }}</p>
+                <small>Created at: {{ review.created_at }}</small>
+                <div class="mt-2">
+                    <a href="{% url 'reviews:edit' review.pk %}" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="{% url 'reviews:delete' review.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                </div>
+            </div>
+        {% empty %}
+            <p class="list-group-item">No reviews found.</p>
+        {% endfor %}
+    </div>
+    <div class="mt-3">
+        <a href="{% url 'reviews:create' %}" class="btn btn-primary">Add New Review</a>
+    </div>
+</div>
+{% endblock %}

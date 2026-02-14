@@ -1,5 +1,12 @@
+from django.urls import reverse_lazy
+from django.views import generic
+
+from reviews.forms import ReviewCreateForm, ReviewEditForm, ReviewDeleteForm, ReviewFormBasic
+from reviews.models import Review
+
+
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 
 from reviews.models import Review
 
@@ -17,11 +24,13 @@ def recent_reviews(request: HttpRequest) -> HttpResponse:
     reviews_count = int(request.GET.get('count', DEFAULT_REVIEW_COUNT))
     reviews = Review.objects.select_related('book')[:reviews_count]
 
-    context = {'reviews': reviews,
-               'page_title': 'Recent reviews',
-               }
+    context = {
+        'reviews': reviews,
+        'page_title': 'Recent reviews',
+    }
 
     return render(request, 'reviews/list.html', context)
+
 
 def review_details(request: HttpRequest, pk: int) -> HttpResponse:
     review = get_object_or_404(
@@ -29,5 +38,72 @@ def review_details(request: HttpRequest, pk: int) -> HttpResponse:
         pk=pk
     )
 
-    context = {'review': review, 'page_title': f'{review.author}\'s review on {review.book.title}'}
+    context = {
+        'review': review,
+        'page_title': f"{review.author}'s review on {review.book.title}"
+    }
     return render(request, 'reviews/detail.html', context)
+
+def review_create(request: HttpRequest) -> HttpResponse:
+    form = ReviewFormBasic(request.POST or None)
+
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        return redirect('reviews:recent')
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'reviews/review_create.html', context)
+
+def review_edit(request: HttpRequest, pk: int) -> HttpResponse:
+    review = Review.objects.get(pk=pk)
+    form = ReviewEditForm(request.POST or None, instance=review)
+
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        return redirect('reviews:list_all')
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'reviews/review_edit.html', context)
+
+def review_delete(request: HttpRequest, pk: int) -> HttpResponse:
+    review = Review.objects.get(pk=pk)
+    form = ReviewDeleteForm(request.POST or None, instance=review)
+
+    if request.method == 'POST' and form.is_valid():
+        review.delete()
+        return redirect('reviews:list_all')
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'reviews/review_delete.html', context)
+
+# class ReviewCreateView(generic.CreateView):
+#     model = Review
+#     form_class = ReviewCreateForm
+#     template_name = 'reviews/review_create.html'
+#     success_url = reverse_lazy('reviews:list_all')
+#
+#
+# class ReviewUpdateView(generic.UpdateView):
+#     model = Review
+#     form_class = ReviewEditForm
+#     template_name = 'reviews/review_edit.html'
+#     success_url = reverse_lazy('reviews:list_all')
+#
+#
+# class ReviewDeleteView(generic.DeleteView):
+#     model = Review
+#     form_class = ReviewDeleteForm
+#     template_name = 'reviews/review_delete.html'
+#     success_url = reverse_lazy('reviews:list_all')
+#
+#
+# class ReviewListView(generic.ListView):
+#     model = Review
+#     template_name = 'reviews/review_list.html'
+#     context_object_name = 'reviews'

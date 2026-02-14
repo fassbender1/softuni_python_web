@@ -18,30 +18,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    {% include 'nav.html' %}
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-2 p-3">
-                <p>Last Time Refresh: {% current_time %}</p>
-
-            </div>
-            <div class="col-md-8 py-4">
-                <div class="text-center">
-                    {% block content %}
-                    {% endblock %}
-                </div>
-            </div>
-            <div class="col-md-2 d-flex justify-content-end p-3">
-                <div>
-                    {% user_info %}
-                </div>
-
-            </div>
+    <div class="d-flex">
+        {% include 'common/nav.html' %}
+        <div class="container-fluid">
+            <header class="d-flex justify-content-end align-items-center p-3">
+            </header>
+            <main class="container">
+                {% block content %}
+                {% endblock %}
+            </main>
         </div>
-
     </div>
 
-</body>
+
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container text-center">
+            <span class="text-muted">Last Time Refresh: {% current_time %}</span>
+        </div>
+    </footer>
+
     <script src="https://unpkg.com/akar-icons-fonts"></script>
-</html>
+</body>

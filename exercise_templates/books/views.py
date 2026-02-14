@@ -1,7 +1,8 @@
-from django.db.models import Avg
+from django.db.models import Avg, Q
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 
+from books.forms import BookFormBasic, BookEditForm, BookDeleteForm, BookSearchForm
 from books.models import Book
 from reviews.models import Review
 
@@ -20,6 +21,7 @@ def landing_page(request: HttpRequest) -> HttpResponse:
     )
     latest_review_author = latest_review.author
     latest_review_rating = latest_review.rating
+    most_reviews = Book.objects.order_by('-reviews_count')[:3]
 
     context = {
         'total_books': total_books,
@@ -29,17 +31,30 @@ def landing_page(request: HttpRequest) -> HttpResponse:
         'latest_review': latest_review,
         'latest_review_author': latest_review_author,
         'latest_review_rating': latest_review_rating,
+        'most_reviews': most_reviews,
     }
     return render(request, 'books/landing_page.html', context)
 
 def books_list(request: HttpRequest) -> HttpResponse:
+    search_form = BookSearchForm(request.GET or None)
+
     list_books = Book.objects.annotate(
         avg_rating=Avg('reviews__rating')
     ).order_by('title')
 
+    if 'query' in request.GET:
+        if search_form.is_valid():
+            search_value = search_form.cleaned_data['query']
+            list_books = list_books.filter(
+                Q(title__icontains=search_value)
+                    |
+                Q(description__icontains=search_value)
+            )
+
     context = {
         'books': list_books,
         'page_title': 'Dashboard',
+        'search_form': search_form,
     }
 
     return render(request, 'books/list.html', context)
@@ -74,3 +89,61 @@ def recently_added(request: HttpRequest) -> HttpResponse:
     }
 
     return render(request, 'books/recently_added.html', context)
+
+def most_reviewed(request: HttpRequest) -> HttpResponse:
+    list_most_reviewed = Book.objects.order_by('-reviews_count')[:10]
+    context = {
+        'most_reviewed_list': list_most_reviewed,
+    }
+
+    return render(request, 'books/most_reviewed.html', context)
+
+def book_create(request: HttpRequest) -> HttpResponse:
+    form = BookFormBasic(request.POST or None)
+
+    if request.method == 'POST' and form.is_valid():
+        # Book.objects.create(
+        #     **form.cleaned_data,
+        #     # title=form.cleaned_data['title'],
+        #     # publishing_date=form.cleaned_data['publishing_date'],
+        #     # isbn=form.cleaned_data['isbn'],
+        #     # price=form.cleaned_data['price'],
+        #     # genre=form.cleaned_data['genre'],
+        #     # description=form.cleaned_data['description'],
+        #     # image_url=form.cleaned_data['image_url'],
+        #     # publisher=form.cleaned_data['publisher'],
+        #
+        # )
+        form.save()
+        return redirect('books:home')
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'books/create.html', context)
+
+def book_edit(request: HttpRequest, pk: int) -> HttpResponse:
+    book = Book.objects.get(pk=pk)
+    form = BookEditForm(request.POST or None, instance=book)
+
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        return redirect('books:home')
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'books/edit.html', context)
+
+def book_delete(request: HttpRequest, pk: int) -> HttpResponse:
+    book = Book.objects.get(pk=pk)
+    form = BookDeleteForm(request.POST or None, instance=book)
+
+    if request.method == 'POST' and form.is_valid():
+        book.delete()
+        return redirect('books:home')
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'books/delete.html', context)

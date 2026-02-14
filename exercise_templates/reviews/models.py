@@ -33,3 +33,5 @@ class Review(TimeStampModel):
 
     class Meta:
         ordering = ['-created_at']
+
+

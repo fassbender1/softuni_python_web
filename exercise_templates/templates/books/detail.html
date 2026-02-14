@@ -7,17 +7,23 @@
     <div class="card">
         <div class="card-header">
             <h1 class="card-title">{{ book.title }}</h1>
+            <img src="{{ book.image_url }}" class="img-fluid" alt="{{ book.title }}">
         </div>
+        <p></p>
         <div class="card-body">
             <h5 class="card-subtitle mb-2 text-muted">By {{ book.author }}</h5>
             <p class="card-text">Published on: {{ book.publishing_date }}</p>
             <p class="card-text"><strong>Rating:</strong> {{ book.average_rating|floatformat:1 }} / 5.0⭐ <small> {{ book.reviews_count  }} reviews</small></p>
             <p class="card-text">{{ book.description }}</p>
             <p class="card-text"><u>{{ book.pages }} pages</u></p>
+            <p class="card-text">Tags:<u>{{ book.tags.all|join:', ' }}</u></p>
         </div>
         <div class="card-footer">
-             <a href="{% url 'books:list' %}" class="btn btn-secondary">Back to List</a>
+            <a href="{% url 'books:list' %}" class="btn btn-secondary">Back to List</a>
+            <a href="{% url 'books:edit' book.pk %}" class="btn btn-warning">Edit</a>
+            <a href="{% url 'books:delete' book.pk %}" class="btn btn-danger">Delete</a>
         </div>
+
     </div>
 
     <hr class="my-4">

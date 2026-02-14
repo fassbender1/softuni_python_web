@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+ {% extends 'base.html' %}
 
 {% block title %}Book List{% endblock %}
 
@@ -6,6 +6,14 @@
 <div class="container">
     <h1 class="my-4">All Books</h1>
     <div class="list-group">
+        <form class="d-flex align-items-center gap-2">
+            {{ search_form }}
+            <button class="btn btn-outline-primary ms-2" type="submit">
+                Search
+            </button>
+        </form>
+
+        <p></p>
         {% for book in books %}
             <a href="{% url 'books:details' book.slug %}" class="list-group-item list-group-item-action">
                 <div class="d-flex w-100 justify-content-between">

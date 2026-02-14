@@ -37,7 +37,10 @@
                 <h2>Recently Published Books</h2>
                 <p>Discover the newest books in our collection.</p>
                 {% if latest_book %}
-                    <h5>{{ latest_book.title }}</h5>
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5>{{ latest_book.title }}</h5>
+                        <small>{{ latest_book.publishing_date|date:"Y-m-d" }}</small>
+                    </div>
                     <small>Rating: {{ latest_book.average_rating }} / 5⭐</small>
                     <p>{{ latest_book.author }}</p>
                     <ul class="list-unstyled">
@@ -72,11 +75,11 @@
         </div>
         <div class="col-md-6">
             <div class="col-md-12">
-                <a href="{% url 'books:top-rated' %}" class="list-group-item list-group-item-action">
+                <a href="{% url 'books:most-reviewed' %}" class="list-group-item list-group-item-action">
                 <div class="h-100 p-5 text-white bg-secondary rounded-3">
                     <h2>Most Reviewed Books</h2>
                     <p>Check out the most popular books that have the highest review counts.</p>
-                    {% for book in top_books %}
+                    {% for book in most_reviews %}
                     <li>
                         <strong>{{ book.title }}</strong><br>
                         Author: {{ book.author }}<br>

@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="container">
-    <h1 class="my-4">Most Recently Published.</h1>
+    <h1 class="my-4">Most Recently Published</h1>
     <div class="list-group">
         {% for book in recent_books_list %}
             <a href="{% url 'books:details' book.slug %}" class="list-group-item list-group-item-action">
