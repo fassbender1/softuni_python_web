@@ -12,9 +12,12 @@
                 </button>
             </form>
             <!-- End Searchbar Form -->
-            {% include 'common/pet-posts.html' %}
+{#            {% include 'common/pet-posts.html' %}#}
 
             <!-- End Third Pet Photo Post -->
+            {% for photo in all_photos %}
+                {% include 'common/pet-posts.html' %}
+            {% endfor %}
 
             <!-- End Pet Photos Post Section -->
 

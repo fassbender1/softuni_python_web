@@ -6,10 +6,13 @@ from photos.models import Photo
 
 # Create your models here.
 
-class Model(models.Model):
+class Comment(models.Model):
     text = models.CharField(max_length=300)
     date_and_time_of_publication = models.DateTimeField(auto_now_add=True)
     to_photo = models.ForeignKey(Photo, on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ['-date_and_time_of_publication']
 
 class Like(models.Model):
     to_photo = models.ForeignKey(Photo, on_delete=models.CASCADE)
