@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<!-- Starts Head Section -->
+
 <head>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link rel="icon" type="image/x-icon" href="{% static 'images/free-30-instagram-stories-icons23_122570.png' %}">
@@ -14,10 +14,8 @@
 <header>
     {% include 'shared/nav.html' %}
 </header>
-<!-- End Header Section with Navigation Bar -->
-<!-- Starts Main Section -->
-<main>
 
+<main>
     {% block content %}
     {% endblock %}
 </main>
@@ -25,7 +23,6 @@
 <div class="footer">
     {% include 'shared/footer.html' %}
 </div>
-
 
 </body>
 </html>

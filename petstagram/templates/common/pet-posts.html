@@ -13,7 +13,6 @@
             </a>
             <h3>
                 <a href="profile details">
-                    <!-- if user has first name and last name -->
                     Diyan Kalaydzhiev
                     <!-- else -->
                     <!-- user username -->
@@ -117,7 +116,6 @@
         <div class="addComments">
 
             <form method="post" action="{% url 'common:add-comment' photo.pk %}">
-{#            <form method="post" action="#">#}
                 {% csrf_token %}
                 <label for="id_body">Body:</label>
                 <textarea name="text" cols="40" rows="10" placeholder="Add comment..." maxlength="300"
