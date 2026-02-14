@@ -12,6 +12,7 @@ class ReviewFormBasic(forms.ModelForm):
             'rating': forms.NumberInput(attrs={'class': 'form-control', 'min': 1, 'max': 5}),
             'author': forms.TextInput(attrs={'class': 'form-control'}),
             'book': forms.Select(attrs={'class': 'form-select'}),
+            'body': forms.Textarea(attrs={'class': 'form-control'}),
         }
 
 

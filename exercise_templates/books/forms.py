@@ -53,7 +53,7 @@ class BookFormBasic(forms.ModelForm):
     tags = forms.CheckboxSelectMultiple()
 
     class Meta:
-        exclude = ['slug']
+        exclude = ['slug', 'reviews_count', 'average_rating']
         # fields = ['title', ]
         model = Book
         widgets = {
@@ -66,6 +66,7 @@ class BookFormBasic(forms.ModelForm):
             'description': forms.Textarea(attrs={'class': 'form-control'}),
             'image_url': forms.URLInput(attrs={'class': 'form-control'}),
             'publisher': forms.TextInput(attrs={'class': 'form-control'}),
+            'pages': forms.NumberInput(attrs={'class': 'form-control'}),
         }
 
         error_messages = {

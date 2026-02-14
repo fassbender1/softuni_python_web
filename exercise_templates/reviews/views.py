@@ -1,6 +1,8 @@
+from django.forms.models import modelformset_factory
 from django.urls import reverse_lazy
 from django.views import generic
 
+from books.models import Book
 from reviews.forms import ReviewCreateForm, ReviewEditForm, ReviewDeleteForm, ReviewFormBasic
 from reviews.models import Review
 
@@ -55,6 +57,35 @@ def review_create(request: HttpRequest) -> HttpResponse:
         'form': form,
     }
     return render(request, 'reviews/review_create.html', context)
+
+def review_bulk_update(request: HttpRequest, book_slug: str) -> HttpResponse:
+    book = get_object_or_404(Book, slug=book_slug)
+    ReviewFormSet = modelformset_factory(
+        Review,
+        form=ReviewEditForm,
+        can_delete=True,
+        extra=1,
+    )
+    formset = ReviewFormSet(
+        request.POST or None,
+        queryset=Review.objects.filter(book=book),
+    )
+
+    if request.method == 'POST' and formset.is_valid():
+        instances = formset.save(commit=False)
+        for instance in instances:
+            instance.book = book
+            instance.save()
+        for instance in formset.deleted_objects:
+            instance.delete()
+        return redirect('reviews:list_all')
+
+    context = {
+        "formset": formset,
+        "book": book,
+    }
+
+    return render(request, 'reviews/formset-edit.html', context)
 
 def review_edit(request: HttpRequest, pk: int) -> HttpResponse:
     review = Review.objects.get(pk=pk)

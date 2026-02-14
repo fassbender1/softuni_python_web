@@ -27,6 +27,7 @@ class Book(TimeStampModel):
         RangeValidator(0, 1000, message="Price must be between 0 and 1000"),
     ])
     isbn = models.CharField(unique=True, max_length=12)
+    cover_image = models.ImageField(null=True, blank=True)
     genre = models.CharField(max_length=50, choices=GenreChoices.choices)
     publishing_date = models.DateField()
     description = models.TextField()

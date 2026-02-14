@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+{%  crispy example_form example_form.helper %}
+
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        {{ formset.management_form }}
+
+
+        {% for form in formset.forms %}
+            {% crispy form %}
+            {% if formset.can_delete %}
+                <div>
+                    {{ form.DELETE }}
+                    <labels>Delete this review</labels>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        <button type="submit">Save all changes</button>
+
+    </form>
+
+{% endblock %}
