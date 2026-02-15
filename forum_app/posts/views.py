@@ -1,7 +1,10 @@
+from datetime import datetime
+
 from django.forms.models import modelform_factory
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
+from django.views.generic import TemplateView, RedirectView
 
 from posts.forms import SearchForm, PostBaseForm, PostEditForm, PostCreateForm, PostDeleteForm, CommentFormSet
 from posts.models import Post
@@ -9,16 +12,39 @@ from posts.models import Post
 
 # Create your views here.
 
-def index(request: HttpRequest) -> HttpResponse:
-    return HttpResponse("Hello, world. You're at the polls index.")
+# def index(request: HttpRequest) -> HttpResponse:
+#     return HttpResponse("Hello, world. You're at the polls index.")
+#
+# class IndexView(View):
+#     def get(self, request:HttpRequest) -> HttpResponse:
+#         print("In class-based view")
+#         return HttpResponse("Hello, world.")
+#
+#     def post(self, request:HttpRequest) -> HttpResponse:
+#         ...
 
-class IndexView(View):
-    def get(self, request:HttpRequest) -> HttpResponse:
-        print("In class-based view")
-        return HttpResponse("Hello, world.")
+class IndexView(TemplateView):
+    template_name = 'index.html'
+    # extra_context = {
+    #     'current_date': datetime.now(),
+    # }   - static method, the value is saved in a constant but not updated regularly
 
-    def post(self, request:HttpRequest) -> HttpResponse:
-        ...
+    # def get_template_names(self):
+    #     if self.request.user.is_staff:
+    #         return ['posts/dashboard.html']
+
+    # def get_context_data(self, **kwargs):
+    #     kwargs.update({
+    #         'current_date': datetime.now(),
+    #     })
+    #     return kwargs                  # dynamic method, the value is updated and shown dynamically
+
+class MyRedirectView(RedirectView):
+    # url = '/dashboard/'    # static way
+    pattern_name = 'dashboard'     # 2nd static way
+
+    # def get_redirect_url(self, *args, **kwargs): # dynamic way
+    #     ...
 
 def dashboard(request: HttpRequest) -> HttpResponse:
     form = SearchForm(request.GET or None) # load what is inside, if it's not an empty dictionary or return None

@@ -4,6 +4,7 @@ from posts import views
 
 urlpatterns = [
 
+    path('redirect/', views.MyRedirectView.as_view()),
     path('',views.IndexView.as_view(),name='index'),
     path('dashboard/',views.dashboard,name='dashboard'),
     path('add-post/', views.add_post, name='add-post'),
