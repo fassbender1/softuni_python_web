@@ -120,7 +120,7 @@ class CommentForm(forms.ModelForm):
         self.fields['content'].widget.attrs.update({
             'class': 'form-control me-2',
             'placeholder': 'Your comment here...',
-            'rows': 1,
+            'rows': 2,
         })
 
-CommentFormSet = formset_factory(CommentForm, extra=3)
+CommentFormSet = formset_factory(CommentForm, extra=1)

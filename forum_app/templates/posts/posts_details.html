@@ -19,7 +19,7 @@
         {% endif %}
     </div>
     <div class="card-footer text-muted">
-        Posted by {{ post.author|default:'Anonymous' }} on {{ post.created_at|date }}
+        Posted by {{ post.author|default:'Anonymous' }} on {{ post.created|date }}
     </div>
     <div class="card-footer text-muted">
         <a href="{% url 'dashboard' %}" class="btn btn-secondary">Back to Dashboard</a>
@@ -32,8 +32,10 @@
         {{ formset.management_form }}
         <div class="inline-group">
             {% for form in formset %}
-                {{ form.author|as_crispy_field }}
-                {{ form.content }}
+                <div class="">
+                    {{ form.author|as_crispy_field }}
+                    {{ form.content }}
+                </div>
                 <div class="inline-group-append">
                     <button class="btn btn-outline-secondary" type="submit">Post</button>
                 </div>

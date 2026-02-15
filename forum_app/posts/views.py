@@ -1,6 +1,7 @@
 from django.forms.models import modelform_factory
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views import View
 
 from posts.forms import SearchForm, PostBaseForm, PostEditForm, PostCreateForm, PostDeleteForm, CommentFormSet
 from posts.models import Post
@@ -10,6 +11,14 @@ from posts.models import Post
 
 def index(request: HttpRequest) -> HttpResponse:
     return HttpResponse("Hello, world. You're at the polls index.")
+
+class IndexView(View):
+    def get(self, request:HttpRequest) -> HttpResponse:
+        print("In class-based view")
+        return HttpResponse("Hello, world.")
+
+    def post(self, request:HttpRequest) -> HttpResponse:
+        ...
 
 def dashboard(request: HttpRequest) -> HttpResponse:
     form = SearchForm(request.GET or None) # load what is inside, if it's not an empty dictionary or return None
