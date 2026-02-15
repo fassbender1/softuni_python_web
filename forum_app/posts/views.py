@@ -3,8 +3,10 @@ from datetime import datetime
 from django.forms.models import modelform_factory
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import TemplateView, RedirectView
+from django.views.generic.edit import BaseUpdateView, CreateView, UpdateView, DeleteView
 
 from posts.forms import SearchForm, PostBaseForm, PostEditForm, PostCreateForm, PostDeleteForm, CommentFormSet
 from posts.models import Post
@@ -83,64 +85,88 @@ def dashboard(request: HttpRequest) -> HttpResponse:
 
     return render(request, 'posts/dashboard.html', context)
 
-def add_post(request: HttpRequest) -> HttpResponse:
-    form = PostCreateForm(request.POST or None, request.FILES or None)
+class AddPostView(CreateView):
+    template_name = 'posts/add-post.html'   # we can skip that if we use the formula for naming
+    form_class = PostCreateForm
+    success_url = reverse_lazy('dashboard')
 
-    if request.method == "POST":
-        if form.is_valid():
-            # post = Post(
-            #     title=form.cleaned_data['title'],
-            #     content=form.cleaned_data['content'],
-            #     author=form.cleaned_data['author'],
-            #     language=form.cleaned_data['languages'],
-            # )
-            # post.save()
-            form.save() # only in ModelForm
-
-            return redirect('dashboard')
-
-    context = {'form':form}
-
-    return render(request, 'posts/add-post.html', context)
-
-
-def edit_post(request: HttpRequest, pk: int) -> HttpResponse:
-    post = get_object_or_404(Post, pk=pk)
-
-
-    if request.user.is_staff:
-        PostForm = modelform_factory(Post, fields=('title', 'content', 'author', 'language'))
-    else:
-        PostForm = modelform_factory(Post, fields=('content',))
-
-    form = PostForm(
-        data=request.POST or None,
-        instance=post,   # model forms only
-    )
-
-    if request.method == "POST":
-        if form.is_valid():
-            form.save()
-            return redirect('dashboard')
-
-    context = {'form':form, 'post':post}
-
-    return render(request, 'posts/edit-post.html', context)
+# def add_post(request: HttpRequest) -> HttpResponse:
+#     form = PostCreateForm(request.POST or None, request.FILES or None)
+#
+#     if request.method == "POST":
+#         if form.is_valid():
+#             # post = Post(
+#             #     title=form.cleaned_data['title'],
+#             #     content=form.cleaned_data['content'],
+#             #     author=form.cleaned_data['author'],
+#             #     language=form.cleaned_data['languages'],
+#             # )
+#             # post.save()
+#             form.save() # only in ModelForm
+#
+#             return redirect('dashboard')
+#
+#     context = {'form':form}
+#
+#     return render(request, 'posts/add-post.html', context)
 
 
-def delete_post(request: HttpRequest, pk: int) -> HttpResponse:
-    post = get_object_or_404(Post, pk=pk)
-    form = PostDeleteForm(
-        instance=post,
-    )
+class EditPostView(UpdateView):
+    model = Post
+    template_name = 'posts/edit-post.html'
+    success_url = reverse_lazy('dashboard')
 
-    if request.method == "POST":
-        post.delete()
-        return redirect('dashboard')
+    def get_form_class(self):
+        if self.request.user.is_staff:
+            return modelform_factory(Post, fields=('title', 'content', 'author', 'language'))
+        return modelform_factory(Post, fields=('content',))
 
-    context = {'form': form, 'post': post}
+# def edit_post(request: HttpRequest, pk: int) -> HttpResponse:
+#     post = get_object_or_404(Post, pk=pk)
+#
+#
+#     if request.user.is_staff:
+#         PostForm = modelform_factory(Post, fields=('title', 'content', 'author', 'language'))
+#     else:
+#         PostForm = modelform_factory(Post, fields=('content',))
+#
+#     form = PostForm(
+#         data=request.POST or None,
+#         instance=post,   # model forms only
+#     )
+#
+#     if request.method == "POST":
+#         if form.is_valid():
+#             form.save()
+#             return redirect('dashboard')
+#
+#     context = {'form':form, 'post':post}
+#
+#     return render(request, 'posts/edit-post.html', context)
 
-    return render(request, 'posts/edit-post.html', context)
+class DeletePostView(DeleteView):
+    model = Post
+    template_name = 'posts/delete-post.html'
+    success_url = reverse_lazy('dashboard')
+    form_class = PostDeleteForm
+
+    def get_initial(self):
+        return self.get_object().__dict__
+
+
+# def delete_post(request: HttpRequest, pk: int) -> HttpResponse:
+#     post = get_object_or_404(Post, pk=pk)
+#     form = PostDeleteForm(
+#         instance=post,
+#     )
+#
+#     if request.method == "POST":
+#         post.delete()
+#         return redirect('dashboard')
+#
+#     context = {'form': form, 'post': post}
+#
+#     return render(request, 'posts/edit-post.html', context)
 
 def details_post(request: HttpRequest, pk: int) -> HttpResponse:
     post = get_object_or_404(Post, pk=pk)
