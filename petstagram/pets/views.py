@@ -1,4 +1,3 @@
-# from lib2to3.fixes.fix_input import context
 
 from django.db.models import Prefetch
 from django.http import HttpRequest, HttpResponse
@@ -14,7 +13,7 @@ def pet_add(request: HttpRequest) -> HttpResponse:
 
     if request.method == "POST" and form.is_valid():
         form.save()
-        return redirect('accounts:details', pk=1)
+        return redirect('accounts:profile_details', pk=1)
 
     context = {
         "form": form,

@@ -70,7 +70,7 @@
         </a>
 
         {% for tagged_pet in photo.tagged_pets.all %}
-            <a href="{% url 'pets:details' username='username' pet_slug=tagged_pet.slug %}">
+            <a href="{% url 'pets:details' 'username' tagged_pet.slug %}">
                 <p class="message">
                     <b>{{ tagged_pet.name }}</b>
                 </p>
