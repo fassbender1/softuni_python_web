@@ -1,0 +1,12 @@
+/* Ensure disabled form-control fields still look styled */
+.form-control:disabled,
+.form-control[readonly] {
+    background-color: #f8f9fa; /* A subtle, light background, similar to active but visually distinct */
+    opacity: 1; /* Ensure full opacity */
+    border-color: #ced4da; /* Standard border color */
+    color: #212529; /* Standard text color */
+    /* Remove any default Bootstrap shadows/effects that might make it look too disabled */
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    cursor: not-allowed; /* Keep cursor to indicate non-interactivity */
+}

@@ -36,6 +36,20 @@ class PostBaseForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={
                 'placeholder': 'Your title here',
+                'class': 'form-control',
+            }),
+            'content': forms.Textarea(attrs={
+                'rows': 10,
+                'class': 'form-control',
+            }),
+            'author': forms.TextInput(attrs={
+                'class': 'form-control',
+            }),
+            'language': forms.Select(attrs={
+                'class': 'form-control',
+            }),
+            'image': forms.ClearableFileInput(attrs={
+                'class': 'form-control',
             })
         }
 
@@ -83,6 +97,10 @@ class PostEditForm(PostBaseForm):
     ...
 
 class PostDeleteForm(PostBaseForm):
+    class Meta:
+        model = Post
+        exclude = ('image',)
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 

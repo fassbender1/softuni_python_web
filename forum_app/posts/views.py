@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from django.forms.models import modelform_factory
+from django import forms
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
@@ -117,9 +118,17 @@ class EditPostView(UpdateView):
     success_url = reverse_lazy('dashboard')
 
     def get_form_class(self):
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'content': forms.Textarea(attrs={'rows': 10, 'class': 'form-control'}),
+            'author': forms.TextInput(attrs={'class': 'form-control'}),
+            'language': forms.Select(attrs={'class': 'form-control'}),
+            'image': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+        }
+
         if self.request.user.is_staff:
-            return modelform_factory(Post, fields=('title', 'content', 'author', 'language'))
-        return modelform_factory(Post, fields=('content',))
+            return modelform_factory(Post, fields=('title', 'content', 'author', 'language', 'image'), widgets=widgets)
+        return modelform_factory(Post, fields=('content', 'image'), widgets=widgets)
 
 # def edit_post(request: HttpRequest, pk: int) -> HttpResponse:
 #     post = get_object_or_404(Post, pk=pk)
@@ -172,7 +181,7 @@ def details_post(request: HttpRequest, pk: int) -> HttpResponse:
     post = get_object_or_404(Post, pk=pk)
     formset = CommentFormSet(request.POST or None)
 
-    if request.POST == "POST":
+    if request.method == "POST":
         if formset.is_valid():
             for form in formset:
                 if form.cleaned_data:

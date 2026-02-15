@@ -33,13 +33,13 @@
         <div class="inline-group">
             {% for form in formset %}
                 <div class="">
-                    {{ form.author|as_crispy_field }}
+                    {{ form.author }}
                     {{ form.content }}
                 </div>
-                <div class="inline-group-append">
-                    <button class="btn btn-outline-secondary" type="submit">Post</button>
-                </div>
             {% endfor %}
+        </div>
+        <div class="inline-group-append">
+            <button class="btn btn-outline-secondary" type="submit">Post</button>
         </div>
     </form>
 </div>
