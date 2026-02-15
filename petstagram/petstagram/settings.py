@@ -28,7 +28,11 @@ SECRET_KEY = 'django-insecure-xquuc(p6w(ym=$4kwxyr7@@5-rel3nx6ck*%u)%(8&xg-6(3y$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+    "gator-causal-monthly.ngrok-free.app",
+]
 
 
 # Application definition
