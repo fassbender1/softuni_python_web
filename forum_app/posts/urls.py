@@ -6,7 +6,7 @@ urlpatterns = [
 
     path('redirect/', views.MyRedirectView.as_view()),
     path('',views.IndexView.as_view(),name='index'),
-    path('dashboard/',views.dashboard,name='dashboard'),
+    path('dashboard/',views.DashboardView.as_view(),name='dashboard'),
     path('add-post/', views.AddPostView.as_view(), name='add-post'),
     path('<int:pk>/edit-post/', views.EditPostView.as_view(), name='edit-post'),
     path('<int:pk>/delete-post/', views.DeletePostView.as_view(), name='delete-post'),

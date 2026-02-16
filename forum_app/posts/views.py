@@ -6,7 +6,7 @@ from django.http import HttpRequest, HttpResponse, request
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views import View
-from django.views.generic import TemplateView, RedirectView, DetailView, ListView
+from django.views.generic import TemplateView, RedirectView, DetailView, ListView, FormView
 from django.views.generic.edit import BaseUpdateView, CreateView, UpdateView, DeleteView
 
 from posts.forms import SearchForm, PostBaseForm, PostEditForm, PostCreateForm, PostDeleteForm, CommentFormSet
@@ -50,8 +50,22 @@ class MyRedirectView(RedirectView):
     # def get_redirect_url(self, *args, **kwargs): # dynamic way
     #     ...
 
-class DashboardView(ListView):
-    ...
+class DashboardView(ListView, FormView):
+    model = Post
+    template_name = 'posts/dashboard.html' # not required
+    form_class = SearchForm
+    context_object_name = 'posts' # so we can use 'posts' in dashboard , otherwise it works with 'object_list'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+
+        if 'query' in self.request.GET:
+            queryset = queryset.filter(title__icontains=self.request.GET.get('query'))
+
+        return queryset
+
+
+
 
 # def dashboard(request: HttpRequest) -> HttpResponse:
 #     form = SearchForm(request.GET or None) # load what is inside, if it's not an empty dictionary or return None
