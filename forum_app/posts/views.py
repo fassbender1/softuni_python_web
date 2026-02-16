@@ -1,15 +1,19 @@
-from datetime import datetime
+from datetime import datetime, time
 
+from django.core.paginator import Paginator
 from django.forms.models import modelform_factory
 from django import forms
 from django.http import HttpRequest, HttpResponse, request
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy, reverse
+from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic import TemplateView, RedirectView, DetailView, ListView, FormView
 from django.views.generic.edit import BaseUpdateView, CreateView, UpdateView, DeleteView
 
+from posts.decorators import measure_execution
 from posts.forms import SearchForm, PostBaseForm, PostEditForm, PostCreateForm, PostDeleteForm, CommentFormSet
+from posts.mixins import TimeRestrictedMixin
 from posts.models import Post
 
 
@@ -50,11 +54,15 @@ class MyRedirectView(RedirectView):
     # def get_redirect_url(self, *args, **kwargs): # dynamic way
     #     ...
 
-class DashboardView(ListView, FormView):
+@method_decorator(measure_execution, name='dispatch')
+class DashboardView(TimeRestrictedMixin, ListView, FormView):
     model = Post
     template_name = 'posts/dashboard.html' # not required
     form_class = SearchForm
-    context_object_name = 'posts' # so we can use 'posts' in dashboard , otherwise it works with 'object_list'
+    # context_object_name = 'posts' # so we can use 'posts' in dashboard , otherwise it works with 'object_list'
+    paginate_by = 4 # number of objects per page
+    start_time = time(9, 0)
+    end_time = time(17, 0)
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -63,9 +71,6 @@ class DashboardView(ListView, FormView):
             queryset = queryset.filter(title__icontains=self.request.GET.get('query'))
 
         return queryset
-
-
-
 
 # def dashboard(request: HttpRequest) -> HttpResponse:
 #     form = SearchForm(request.GET or None) # load what is inside, if it's not an empty dictionary or return None
@@ -76,33 +81,38 @@ class DashboardView(ListView, FormView):
 #             query = form.cleaned_data['query']
 #             posts = Post.objects.filter(title__icontains=query)
 #
-#     context = {'posts':posts, 'form':form}
+#     page = request.GET.get('page', 1)
+#     per_page = 10
+#     paginator = Paginator(posts, per_page=per_page)
+#     page_obj = paginator.get_page(page)
 #
-#     #below lines were commented in order to test Forms lecture
-#     # context = {
-#     #     'posts':  [
-#     #         {
-#     #         'title': 'This is a test post 1',
-#     #         'content': '',
-#     #         'author': 'Boris',
-#     #         'created_at': datetime.datetime.now(),
-#     #          },
-#     #         {
-#     #         'title': 'This is a test post 2',
-#     #         'content': '*Some* Description here',
-#     #         'author': 'Pesho',
-#     #         'created_at': datetime.datetime.now(),
-#     #         },
-#     #         {
-#     #          'title': 'This is a test post 3',
-#     #         'content': '**Some** <i>Description</i> here',
-#     #         'author': 'Gosho',
-#     #         'created_at': datetime.datetime.now(),
-#     #         },
-#     #     ],
-#     # }
-#
-#     return render(request, 'posts/dashboard.html', context)
+#     context = {'posts':posts, 'form':form, 'page_obj':page_obj}
+
+    #below lines were commented in order to test Forms lecture
+    # context = {
+    #     'posts':  [
+    #         {
+    #         'title': 'This is a test post 1',
+    #         'content': '',
+    #         'author': 'Boris',
+    #         'created_at': datetime.datetime.now(),
+    #          },
+    #         {
+    #         'title': 'This is a test post 2',
+    #         'content': '*Some* Description here',
+    #         'author': 'Pesho',
+    #         'created_at': datetime.datetime.now(),
+    #         },
+    #         {
+    #          'title': 'This is a test post 3',
+    #         'content': '**Some** <i>Description</i> here',
+    #         'author': 'Gosho',
+    #         'created_at': datetime.datetime.now(),
+    #         },
+    #     ],
+    # }
+
+    # return render(request, 'posts/dashboard.html', context)
 
 class AddPostView(CreateView):
     template_name = 'posts/add-post.html'   # we can skip that if we use the formula for naming
