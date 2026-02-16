@@ -6,7 +6,7 @@ from django.http import HttpRequest, HttpResponse, request
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views import View
-from django.views.generic import TemplateView, RedirectView, DetailView
+from django.views.generic import TemplateView, RedirectView, DetailView, ListView
 from django.views.generic.edit import BaseUpdateView, CreateView, UpdateView, DeleteView
 
 from posts.forms import SearchForm, PostBaseForm, PostEditForm, PostCreateForm, PostDeleteForm, CommentFormSet
@@ -50,42 +50,45 @@ class MyRedirectView(RedirectView):
     # def get_redirect_url(self, *args, **kwargs): # dynamic way
     #     ...
 
-def dashboard(request: HttpRequest) -> HttpResponse:
-    form = SearchForm(request.GET or None) # load what is inside, if it's not an empty dictionary or return None
-    posts = Post.objects.all()
+class DashboardView(ListView):
+    ...
 
-    if request.method == "GET":
-        if form.is_valid():
-            query = form.cleaned_data['query']
-            posts = Post.objects.filter(title__icontains=query)
-
-    context = {'posts':posts, 'form':form}
-
-    #below lines were commented in order to test Forms lecture
-    # context = {
-    #     'posts':  [
-    #         {
-    #         'title': 'This is a test post 1',
-    #         'content': '',
-    #         'author': 'Boris',
-    #         'created_at': datetime.datetime.now(),
-    #          },
-    #         {
-    #         'title': 'This is a test post 2',
-    #         'content': '*Some* Description here',
-    #         'author': 'Pesho',
-    #         'created_at': datetime.datetime.now(),
-    #         },
-    #         {
-    #          'title': 'This is a test post 3',
-    #         'content': '**Some** <i>Description</i> here',
-    #         'author': 'Gosho',
-    #         'created_at': datetime.datetime.now(),
-    #         },
-    #     ],
-    # }
-
-    return render(request, 'posts/dashboard.html', context)
+# def dashboard(request: HttpRequest) -> HttpResponse:
+#     form = SearchForm(request.GET or None) # load what is inside, if it's not an empty dictionary or return None
+#     posts = Post.objects.all()
+#
+#     if request.method == "GET":
+#         if form.is_valid():
+#             query = form.cleaned_data['query']
+#             posts = Post.objects.filter(title__icontains=query)
+#
+#     context = {'posts':posts, 'form':form}
+#
+#     #below lines were commented in order to test Forms lecture
+#     # context = {
+#     #     'posts':  [
+#     #         {
+#     #         'title': 'This is a test post 1',
+#     #         'content': '',
+#     #         'author': 'Boris',
+#     #         'created_at': datetime.datetime.now(),
+#     #          },
+#     #         {
+#     #         'title': 'This is a test post 2',
+#     #         'content': '*Some* Description here',
+#     #         'author': 'Pesho',
+#     #         'created_at': datetime.datetime.now(),
+#     #         },
+#     #         {
+#     #          'title': 'This is a test post 3',
+#     #         'content': '**Some** <i>Description</i> here',
+#     #         'author': 'Gosho',
+#     #         'created_at': datetime.datetime.now(),
+#     #         },
+#     #     ],
+#     # }
+#
+#     return render(request, 'posts/dashboard.html', context)
 
 class AddPostView(CreateView):
     template_name = 'posts/add-post.html'   # we can skip that if we use the formula for naming
