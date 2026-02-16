@@ -2,11 +2,11 @@ from datetime import datetime
 
 from django.forms.models import modelform_factory
 from django import forms
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponse, request
 from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views import View
-from django.views.generic import TemplateView, RedirectView
+from django.views.generic import TemplateView, RedirectView, DetailView
 from django.views.generic.edit import BaseUpdateView, CreateView, UpdateView, DeleteView
 
 from posts.forms import SearchForm, PostBaseForm, PostEditForm, PostCreateForm, PostDeleteForm, CommentFormSet
@@ -41,6 +41,7 @@ class IndexView(TemplateView):
     #         'current_date': datetime.now(),
     #     })
     #     return kwargs                  # dynamic method, the value is updated and shown dynamically
+
 
 class MyRedirectView(RedirectView):
     # url = '/dashboard/'    # static way
@@ -177,11 +178,25 @@ class DeletePostView(DeleteView):
 #
 #     return render(request, 'posts/edit-post.html', context)
 
-def details_post(request: HttpRequest, pk: int) -> HttpResponse:
-    post = get_object_or_404(Post, pk=pk)
-    formset = CommentFormSet(request.POST or None)
+class DetailsPostView(DetailView):
+    model = Post
+    template_name = 'posts/posts_details.html'
 
-    if request.method == "POST":
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['formset'] = CommentFormSet()
+        context['comments'] = self.object.comments.all()
+        return context
+
+    def get_absolute_url(self):
+        return reverse('details-post', kwargs={
+            self.pk_url_kwarg: self.kwargs.get(self.pk_url_kwarg)
+        })
+
+    def post(self, request, *args, **kwargs):
+        post = self.get_object()
+        formset = CommentFormSet(request.POST or None)
+
         if formset.is_valid():
             for form in formset:
                 if form.cleaned_data:
@@ -191,9 +206,23 @@ def details_post(request: HttpRequest, pk: int) -> HttpResponse:
 
             return redirect('details-post', pk=post.pk)
 
-    context = {'post':post, 'formset':formset}
-
-    return render(request, 'posts/posts_details.html', context)
+# def details_post(request: HttpRequest, pk: int) -> HttpResponse:
+#     post = get_object_or_404(Post, pk=pk)
+#     formset = CommentFormSet(request.POST or None)
+#
+#     if request.method == "POST":
+#         if formset.is_valid():
+#             for form in formset:
+#                 if form.cleaned_data:
+#                     comment = form.save(commit=False)
+#                     comment.post = post
+#                     comment.save()
+#
+#             return redirect('details-post', pk=post.pk)
+#
+#     context = {'post':post, 'formset':formset}
+#
+#     return render(request, 'posts/posts_details.html', context)
 
 
 
