@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card border-danger shadow-lg">
+                <div class="card-header bg-danger text-white text-center">
+                    <h3 class="mb-0">Confirm Deletion</h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-text text-center fs-5">Are you sure you want to delete "{{ object }}"?</p>
+                    <p class="text-center text-muted">This action cannot be undone.</p>
+                    <form method="post" class="d-flex justify-content-center mt-4">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-lg mx-2">Confirm Delete</button>
+                        <a href="{% url 'common:home' %}" class="btn btn-secondary btn-lg mx-2">Cancel</a> {# Assuming 'common:home' is a safe redirect #}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

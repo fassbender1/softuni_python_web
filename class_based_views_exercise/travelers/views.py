@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, DeleteView
 
 from travelers.forms import TravelerForm
 from travelers.models import Traveler
@@ -24,4 +24,9 @@ class TravelerCreateView(CreateView):
 class TravelerUpdateView(UpdateView):
     model = Traveler
     form_class = TravelerForm
+    success_url = reverse_lazy('common:home')
+
+class TravelerDeleteView(DeleteView):   # example how to create this without form
+    model = Traveler
+    # form_class = TravelerForm
     success_url = reverse_lazy('common:home')
