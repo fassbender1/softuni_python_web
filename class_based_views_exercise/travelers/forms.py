@@ -3,7 +3,7 @@ from django import forms
 from travelers.models import Traveler
 
 
-class TravelerForm(forms.Form):
+class TravelerForm(forms.ModelForm):
     class Meta:
         model = Traveler
         exclude = ['registered_at']
