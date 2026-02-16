@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Traveler Details{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h1 class="mb-0">{{ traveler.name }}</h1>
+        </div>
+        <div class="card-body">
+            <p class="card-text"><strong>Email:</strong> {{ traveler.email }}</p>
+            <p class="card-text"><strong>Country:</strong> {{ traveler.country }}</p>
+            <p class="card-text"><strong>Age:</strong> {{ traveler.age }}</p>
+        
+            <div class="detail-item">
+                <strong>Reviews count: </strong> {{ reviews_count }}
+            </div>
+
+            <div class="mt-4">
+                <a href="{% url 'travelers:update' traveler.pk %}" class="btn btn-warning me-2">Edit Traveler</a>
+                <a href="{% url 'travelers:delete' traveler.pk %}" class="btn btn-danger">Delete Traveler</a>
+            </div>
+
+            <hr class="my-4">
+
+            <h3 class="mb-3">Destinations</h3>
+            {% if traveler.destination_set.all %}
+                <ul class="list-group">
+                    {% for destination in traveler.destination_set.all %}
+                        <li class="list-group-item">
+                            <a href="{% url 'destinations:detail' destination.pk %}">{{ destination.name }}</a> ({{ destination.country }})
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No destinations planned yet.</p>
+            {% endif %}
+
+            <hr class="my-4">
+
+            <h3 class="mb-3">Reviews</h3>
+            {% if traveler.review_set.all %}
+                <ul class="list-group">
+                    {% for review in traveler.review_set.all %}
+                        <li class="list-group-item">
+                            <strong>{{ review.destination.name }}:</strong> {{ review.rating }} stars - "{{ review.comment }}"
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No reviews submitted yet.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
