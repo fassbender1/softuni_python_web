@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
+from django.views.generic import CreateView, UpdateView, DeleteView, DetailView, ListView
 
 from travelers.forms import TravelerForm
 from travelers.models import Traveler
@@ -42,3 +42,6 @@ class TravelerDetailView(DetailView):
         context['reviews_count'] = self.object.reviews.count()
         context['visited_destinations'] = self.object.destinations
         return context
+
+class TravelerListView(ListView):
+    ...

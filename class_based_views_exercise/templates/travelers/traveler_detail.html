@@ -29,8 +29,7 @@
                 <ul class="list-group">
                     {% for destination in traveler.destinations.all %}
                         <li class="list-group-item">
-{#                            <a href="{% url 'destinations:detail' destination.pk %}">{{ destination.name }}</a> ({{ destination.country }})#}
-                            <a href="/">{{ destination.name }}</a> ({{ destination.country }})
+                            <a href="{% url 'destinations:detail' destination.pk %}">{{ destination.name }}</a> ({{ destination.country }})
                         </li>
                     {% endfor %}
                 </ul>
