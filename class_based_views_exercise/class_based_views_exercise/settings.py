@@ -33,7 +33,8 @@ ALLOWED_HOSTS = []
 PROJECT_APPS = [
     'travelers',
     'destinations',
-    'reviews'
+    'reviews',
+    'common'
 ]
 
 INSTALLED_APPS = [
