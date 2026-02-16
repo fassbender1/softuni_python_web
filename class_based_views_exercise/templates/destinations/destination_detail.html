@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}Destination Details: {{ destination.name }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-success text-white">
+            <h1 class="mb-0">{{ destination.name }}</h1>
+        </div>
+        <div class="card-body">
+            <p class="card-text"><strong>Country:</strong> {{ destination.country }}</p>
+            <p class="card-text"><strong>Price:</strong> ${{ destination.price }}</p>
+            <p class="card-text"><strong>Availability:</strong>
+                {% if destination.is_available %}
+                    <span class="badge bg-success">Available</span>
+                {% else %}
+                    <span class="badge bg-danger">Not Available</span>
+                {% endif %}
+            </p>
+            {% if destination.description %}
+                <p class="card-text"><strong>Description:</strong> {{ destination.description }}</p>
+            {% endif %}
+            <p class="card-text"><strong>Last Updated:</strong> {{ destination.updated_at|date:"F d, Y H:i" }}</p>
+            <p class="card-text"><strong>Average Rating:</strong> {{ destination.avg_rating|floatformat:2|default:"No Reviews yet!" }} / 5.00</p>
+
+            <div class="mt-4">
+{#                <a href="{% url 'destinations:create' destination.pk %}" class="btn btn-warning me-2">Edit Destination</a>#}
+{#                <a href="{% url 'destinations:delete' destination.pk %}" class="btn btn-danger">Delete Destination</a>#}
+            </div>
+
+            <hr class="my-4">
+
+            <h3 class="mb-3">Travelers who visited this destination</h3>
+            {% if destination.travelers.all %}
+                <ul class="list-group">
+                    {% for traveler in destination.travelers.all %}
+                        <li class="list-group-item">
+                            <a href="{% url 'travelers:detail' traveler.pk %}">{{ traveler.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No travelers have visited this destination yet.</p>
+            {% endif %}
+
+            <hr class="my-4">
+
+            <h3 class="mb-3">Reviews for this Destination</h3>
+            {% if destination.reviews.all %}
+                <ul class="list-group">
+                    {% for review in destination.reviews.all %}
+                        <li class="list-group-item">
+                            <strong>{{ review.traveler.name }}:</strong> {{ review.rating }} stars - "{{ review.body }}"
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No reviews yet for this destination.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

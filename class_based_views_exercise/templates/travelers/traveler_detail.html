@@ -12,7 +12,7 @@
             <p class="card-text"><strong>Email:</strong> {{ traveler.email }}</p>
             <p class="card-text"><strong>Country:</strong> {{ traveler.country }}</p>
             <p class="card-text"><strong>Age:</strong> {{ traveler.age }}</p>
-        
+
             <div class="detail-item">
                 <strong>Reviews count: </strong> {{ reviews_count }}
             </div>
@@ -25,11 +25,12 @@
             <hr class="my-4">
 
             <h3 class="mb-3">Destinations</h3>
-            {% if traveler.destination_set.all %}
+            {% if traveler.destinations.all %}
                 <ul class="list-group">
-                    {% for destination in traveler.destination_set.all %}
+                    {% for destination in traveler.destinations.all %}
                         <li class="list-group-item">
-                            <a href="{% url 'destinations:detail' destination.pk %}">{{ destination.name }}</a> ({{ destination.country }})
+{#                            <a href="{% url 'destinations:detail' destination.pk %}">{{ destination.name }}</a> ({{ destination.country }})#}
+                            <a href="/">{{ destination.name }}</a> ({{ destination.country }})
                         </li>
                     {% endfor %}
                 </ul>
@@ -40,11 +41,11 @@
             <hr class="my-4">
 
             <h3 class="mb-3">Reviews</h3>
-            {% if traveler.review_set.all %}
+            {% if traveler.reviews.all %}
                 <ul class="list-group">
-                    {% for review in traveler.review_set.all %}
+                    {% for review in traveler.reviews.all %}
                         <li class="list-group-item">
-                            <strong>{{ review.destination.name }}:</strong> {{ review.rating }} stars - "{{ review.comment }}"
+                            <strong>{{ review.destination.name }}:</strong> {{ review.rating }} stars - "{{ review.body }}"
                         </li>
                     {% endfor %}
                 </ul>
@@ -52,6 +53,11 @@
                 <p>No reviews submitted yet.</p>
             {% endif %}
         </div>
+
+        {% for traveler in travelers %}
+            <a href="{% url 'travelers:detail' traveler.pk %}"></a>
+{#            <a href="{{ traveler.get_absolute_url }}"></a>#} # example with absolute url
+        {% endfor %}
     </div>
 </div>
 {% endblock %}

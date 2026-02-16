@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import RegexValidator, MinValueValidator
 from django.forms import ValidationError
+from django.urls import reverse
 
 from common.choices import CountryChoice
 from travelers.validator import validate_email_domain
@@ -35,6 +36,9 @@ class Traveler(models.Model):
         null=False,
         blank=False,
     )
+
+    def get_absolute_url(self):
+        return reverse('travelers:detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.name

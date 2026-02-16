@@ -40,4 +40,5 @@ class TravelerDetailView(DetailView):
     def get_context_data(self, **kwargs) -> dict:
         context = super().get_context_data()
         context['reviews_count'] = self.object.reviews.count()
+        context['visited_destinations'] = self.object.destinations
         return context
