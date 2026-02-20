@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Review List{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Reviews</h1>
+
+    <div class="mb-4">
+        <form method="get" action="/reviews/" class="d-flex mb-2">
+            <input type="text" name="q" placeholder="Search reviews..." value="{{ request.GET.q }}" class="form-control me-2">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+
+        <div class="btn-group" role="group" aria-label="Review type filter">
+            <a href="/reviews/?type=Excellent" class="btn btn-outline-secondary {% if request.GET.type == 'Excellent' %}active{% endif %}">Excellent</a>
+            <a href="/reviews/?type=Good" class="btn btn-outline-secondary {% if request.GET.type == 'Good' %}active{% endif %}">Good</a>
+            <a href="/reviews/?type=Average" class="btn btn-outline-secondary {% if request.GET.type == 'Average' %}active{% endif %}">Average</a>
+            <a href="/reviews/?type=Poor" class="btn btn-outline-secondary {% if request.GET.type == 'Poor' %}active{% endif %}">Poor</a>
+            <a href="/reviews/?type=Terrible" class="btn btn-outline-secondary {% if request.GET.type == 'Terrible' %}active{% endif %}">Terrible</a>
+            <a href="/reviews/" class="btn btn-outline-secondary {% if not request.GET.type %}active{% endif %}">All</a>
+        </div>
+    </div>
+
+
+    <div class="row">
+        {% for review in review_list %}
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body" >
+                    <h5 class="card-title">{{ review.review_type }} - Rating: {{ review.rating }}/5</h5>
+                    <p class="card-text">{{ review.text }}</p>
+                    <p class="card-text"><small class="text-muted">Reviewed on: {{ review.created_at|date:"M d, Y" }}</small></p>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <p class="text-muted">No reviews found.</p>
+        </div>
+        {% endfor %}
+    </div>
+
+
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="/reviews/?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.type %}&type={{ request.GET.type }}{% endif %}">Previous</a>
+                </li>
+            {% endif %}
+
+            <li class="page-item disabled">
+                <span class="page-link">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                                        {{ page_message }}
+                </span>
+            </li>
+
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="/reviews/?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.type %}&type={{ request.GET.type }}{% endif %}">Next</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+{% endblock %}

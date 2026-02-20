@@ -12,17 +12,20 @@ from travelers.models import Traveler
 
 # Create your views here.
 
-class Welcome(View):
-    # def dispatch(self, request, *args, **kwargs): # in case that you need to overwrite the dispatch
-    #     if request.user.is_staff:
-    #         return HttpResponse(status=403)
-    #     return super().dispatch(request, *args, **kwargs)
+class Welcome(TemplateView):
+    template_name = 'adult_welcome.html'
 
-    def get(self, request: HttpRequest) -> HttpResponse:
-        return HttpResponse("Welcome to our travel app!")
-
-    def post(self, request: HttpRequest) -> HttpResponse:
-        return HttpResponse("Post was called!")
+# class Welcome(View):
+#     # def dispatch(self, request, *args, **kwargs): # in case that you need to overwrite the dispatch
+#     #     if request.user.is_staff:
+#     #         return HttpResponse(status=403)
+#     #     return super().dispatch(request, *args, **kwargs)
+#
+#     def get(self, request: HttpRequest) -> HttpResponse:
+#         return HttpResponse("Welcome to our travel app!")
+#
+#     def post(self, request: HttpRequest) -> HttpResponse:
+#         return HttpResponse("Post was called!")
 
 class HomeView(TemplateView):
 

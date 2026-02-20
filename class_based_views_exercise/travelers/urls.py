@@ -8,5 +8,6 @@ urlpatterns = [
     path('update/<int:pk>/', views.TravelerUpdateView.as_view(), name='update'),
     path('delete/<int:pk>/', views.TravelerDeleteView.as_view(), name='delete'),
     path('<int:pk>/', views.TravelerDetailView.as_view(), name='detail'),
+    path('', views.TravelerListView.as_view(), name='list'),
 
 ]

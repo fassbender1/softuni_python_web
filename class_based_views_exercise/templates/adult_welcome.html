@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Welcome!{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <h1 class="display-4">Welcome to Our Community!</h1>
+            <p class="lead">
+                We're thrilled to have you join us. As a valued member over 21,
+                you have access to all our features and content.
+            </p>
+            <p>
+                Explore exciting destinations, read and write reviews, and connect with fellow travelers.
+                Your next adventure awaits!
+            </p>
+            <hr class="my-4">
+            <p class="lead">
+                <a class="btn btn-primary btn-lg" href="{% url 'common:home' %}" role="button">Go to Home Page</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
