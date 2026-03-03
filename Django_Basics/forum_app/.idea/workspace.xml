@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0fc1f160-16e9-4e1f-8ec4-6e83e941e810" name="Changes" comment="" />
+    <list default="true" id="4c4032ac-ddb1-4a14-a2e0-313dcd4e3e2b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../petstagram/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../petstagram/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../petstagram/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../petstagram/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,6 +16,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="TypeScript File" />
+        <option value="CSS File" />
         <option value="HTML File" />
         <option value="Python Script" />
       </list>
@@ -34,12 +39,9 @@
   }
 }</component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 2
+  &quot;associatedIndex&quot;: 0
 }</component>
-  <component name="ProjectId" id="38rSSi2owWtXU8uHEniTB9tSC0f" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="1" id="Add" />
-  </component>
+  <component name="ProjectId" id="38gXR1HAxxcLMPXndTNAOqXyCzO" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -47,7 +49,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "DefaultHtmlFileTemplate": "HTML File",
-    "Django Server.petstagram.executor": "Run",
+    "Django Server.forum_app.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -57,9 +59,11 @@
     "ai.playground.ignore.import.keys.banner.in.settings": "true",
     "django.template.preview.state": "SHOW_EDITOR",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/User/Desktop/SoftProjects/SoftUni_Python_Web/softuni_python_web/Django_Basics/petstagram",
+    "last_opened_file_path": "C:/Users/User/Desktop/SoftProjects/SoftUni_Python_Web/softuni_python_web/Django_Basics/forum_app",
+    "list.type.of.created.stylesheet": "CSS",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\PyCharm 2025.3.1.1\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -68,21 +72,15 @@
     ]
   }
 }]]></component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\User\Desktop\SoftProjects\SoftUni_Python_Web\softuni_python_web\petstagram\static\images" />
-      <recent name="C:\Users\User\Desktop\SoftProjects\SoftUni_Python_Web\softuni_python_web\petstagram\templates\shared" />
-    </key>
-  </component>
   <component name="RunManager">
-    <configuration name="petstagram" type="Python.DjangoServer" factoryName="Django server">
-      <module name="petstagram" />
+    <configuration name="forum_app" type="Python.DjangoServer" factoryName="Django server">
+      <module name="forum_app" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
-        <env name="DJANGO_SETTINGS_MODULE" value="petstagram.settings" />
+        <env name="DJANGO_SETTINGS_MODULE" value="forum_app.settings" />
       </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="" />
@@ -112,21 +110,20 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="0fc1f160-16e9-4e1f-8ec4-6e83e941e810" name="Changes" comment="" />
-      <created>1769556197859</created>
+      <changelist id="4c4032ac-ddb1-4a14-a2e0-313dcd4e3e2b" name="Changes" comment="" />
+      <created>1769222175828</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1769556197859</updated>
-      <workItem from="1769556198901" duration="20040000" />
-      <workItem from="1769899276662" duration="24000" />
-      <workItem from="1770245962978" duration="2000" />
-      <workItem from="1770572063525" duration="672000" />
-      <workItem from="1771030937622" duration="710000" />
-      <workItem from="1771088946055" duration="7396000" />
-      <workItem from="1771102578798" duration="12559000" />
-      <workItem from="1771120994448" duration="59000" />
-      <workItem from="1771693295446" duration="3377000" />
-      <workItem from="1772510236572" duration="114000" />
+      <updated>1769222175828</updated>
+      <workItem from="1769222176853" duration="21165000" />
+      <workItem from="1770600604844" duration="26814000" />
+      <workItem from="1771121054740" duration="14483000" />
+      <workItem from="1771179727873" duration="46000" />
+      <workItem from="1771209149942" duration="10099000" />
+      <workItem from="1771553429206" duration="1429000" />
+      <workItem from="1771645919047" duration="3130000" />
+      <workItem from="1772510061522" duration="34000" />
+      <workItem from="1772510305933" duration="183000" />
     </task>
     <servers />
   </component>

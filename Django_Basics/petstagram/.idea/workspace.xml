@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0fc1f160-16e9-4e1f-8ec4-6e83e941e810" name="Changes" comment="" />
+    <list default="true" id="0fc1f160-16e9-4e1f-8ec4-6e83e941e810" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../petstagram/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../petstagram/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../petstagram/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../petstagram/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -126,7 +129,7 @@
       <workItem from="1771102578798" duration="12559000" />
       <workItem from="1771120994448" duration="59000" />
       <workItem from="1771693295446" duration="3377000" />
-      <workItem from="1772510236572" duration="114000" />
+      <workItem from="1772510236572" duration="249000" />
     </task>
     <servers />
   </component>
