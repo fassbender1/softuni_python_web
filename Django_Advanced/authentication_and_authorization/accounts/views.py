@@ -7,20 +7,14 @@ from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 
 
-# Create your views here.
-
-class HomeView(PermissionRequiredMixin, LoginRequiredMixin, TemplateView):
-    template_name = 'fbv/home.html'
-    # permission_required = 'view_session'   # example as the bobi2 user was edited to only be able to view users
-    permission_required = 'auth.view_user'   # example, bobi2 can view only user data, so this works
-
-@login_required
-def home(request):
-    return render(request, 'fbv/home.html')
-    # if request.user.has_perm('view_session'):     # FBV example on limiting a user that doesn't have permissions, to 403 error page, instead of home, if he does have permission
-    #     return render(request, 'fbv/home.html')
-    #
-    # return HttpResponse(status=403)
+# Create your views here
+# @login_required
+# def home(request):
+#     return render(request, 'fbv/home.html')
+#     # if request.user.has_perm('view_session'):     # FBV example on limiting a user that doesn't have permissions, to 403 error page, instead of home, if he does have permission
+#     #     return render(request, 'fbv/home.html')
+#     #
+#     # return HttpResponse(status=403)
 
 def register_fbv(request: HttpRequest):
     form = UserCreationForm(request.POST or None)
@@ -54,6 +48,4 @@ def logout_fbv(request: HttpRequest):
     if request.POST:
         logout(request)
     return redirect('home')
-
-
 
