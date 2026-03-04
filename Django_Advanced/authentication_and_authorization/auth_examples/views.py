@@ -1,15 +1,26 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
+from django.views.generic import TemplateView
 
 
 # Create your views here.
 
+class HomeView(PermissionRequiredMixin, LoginRequiredMixin, TemplateView):
+    template_name = 'fbv/home.html'
+    # permission_required = 'view_session'   # example as the bobi2 user was edited to only be able to view users
+    permission_required = 'auth.view_user'   # example, bobi2 can view only user data, so this works
+
 @login_required
 def home(request):
     return render(request, 'fbv/home.html')
+    # if request.user.has_perm('view_session'):     # FBV example on limiting a user that doesn't have permissions, to 403 error page, instead of home, if he does have permission
+    #     return render(request, 'fbv/home.html')
+    #
+    # return HttpResponse(status=403)
 
 def register_fbv(request: HttpRequest):
     form = UserCreationForm(request.POST or None)
