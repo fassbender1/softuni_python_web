@@ -24,7 +24,7 @@ def register_fbv(request: HttpRequest):
         login(request, user)
         return redirect('home')
 
-    return render(request, 'fbv/register.html', {'form': form})
+    return render(request, 'accounts/register.html', {'form': form})
 
 def login_fbv(request: HttpRequest) -> HttpResponse:
     form = AuthenticationForm(request, request.POST or None)
@@ -42,10 +42,15 @@ def login_fbv(request: HttpRequest) -> HttpResponse:
     #     login(request, user)
     #     return redirect('home')
 
-    return render(request, 'fbv/login.html', {'form': form})
+    return render(request, 'accounts/login.html', {'form': form})
 
 def logout_fbv(request: HttpRequest):
     if request.POST:
         logout(request)
     return redirect('home')
+
+
+#LoginRequiredMixin
+class ProfileView(TemplateView):
+    template_name = "accounts/profile_details.html"
 

@@ -7,7 +7,7 @@
 <body>
     <h1>Welcome</h1>
     {% if request.user.is_authenticated %}
-        <form action="{% url 'logout-cbv' %}" method="post">
+        <form action="{% url 'accounts:logout-cbv' %}" method="post">
             {% csrf_token %}
             <button>Logout</button>
         </form>
