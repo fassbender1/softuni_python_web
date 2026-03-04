@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 # Create your views here.
 
 def home(request):
-    return HttpResponse("Home")
+    return render(request, 'fbv/home.html')
 
 def register_fbv(request: HttpRequest):
     form = UserCreationForm(request.POST or None)
@@ -41,4 +41,6 @@ def logout_fbv(request: HttpRequest):
     if request.POST:
         logout(request)
     return redirect('home')
+
+
 
