@@ -11,4 +11,5 @@ urlpatterns = [
     path('cbv/login/', LoginView.as_view(template_name='accounts/login.html'), name='login-cbv'),
     path('cbv/logout/', LogoutView.as_view(), name='logout-cbv'),
     path('details/', views.ProfileView.as_view(), name='detail'),
+    path('cbv/register/', views.RegisterView.as_view(), name='register-cbv'),
 ]

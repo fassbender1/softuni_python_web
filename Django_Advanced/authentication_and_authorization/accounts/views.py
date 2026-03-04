@@ -1,10 +1,11 @@
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin, UserPassesTestMixin
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView
+from django.urls import reverse_lazy
+from django.views.generic import TemplateView, CreateView
 
 
 # Create your views here
@@ -15,6 +16,8 @@ from django.views.generic import TemplateView
 #     #     return render(request, 'fbv/home.html')
 #     #
 #     # return HttpResponse(status=403)
+
+UserModel = get_user_model()
 
 def register_fbv(request: HttpRequest):
     form = UserCreationForm(request.POST or None)
@@ -48,6 +51,16 @@ def logout_fbv(request: HttpRequest):
     if request.POST:
         logout(request)
     return redirect('home')
+
+class RegisterView(UserPassesTestMixin, CreateView):
+    form_class = UserCreationForm
+    model = UserModel
+    template_name = 'accounts/register.html'
+    success_url = reverse_lazy('home')
+
+    def test_func(self):
+        return not self.request.user.is_authenticated
+
 
 
 #LoginRequiredMixin
