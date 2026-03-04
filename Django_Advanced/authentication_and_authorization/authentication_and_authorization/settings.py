@@ -117,5 +117,6 @@ USE_TZ = True
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
+LOGIN_URL = 'login-cbv'
 
 STATIC_URL = 'static/'
