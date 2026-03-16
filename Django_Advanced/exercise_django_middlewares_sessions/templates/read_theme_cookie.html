@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Theme Cookie{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow-sm">
+            <div class="card-header bg-info text-white text-center">
+                <h3 class="h5 mb-0">Theme Cookie Value</h3>
+            </div>
+            <div class="card-body text-center">
+                <p class="mb-4">
+                    The current value of the <strong>theme</strong> cookie is:
+                </p>
+                
+                {% if theme_value %}
+                    <div class="display-6 fw-bold text-primary mb-4">
+                        {{ theme_value }}
+                    </div>
+                {% else %}
+                    <div class="alert alert-warning" role="alert">
+                        No theme cookie found.
+                    </div>
+                {% endif %}
+
+                <div class="d-grid gap-2">
+                    <a href="{% url 'set-theme-cookie' %}" class="btn btn-primary">Set Theme Cookie (Dark)</a>
+                    <a href="{% url 'home' %}" class="btn btn-outline-secondary">Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

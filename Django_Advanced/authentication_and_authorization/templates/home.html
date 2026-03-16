@@ -6,6 +6,9 @@
 </head>
 <body>
     <h1>Welcome</h1>
+    {% for message in messages %}
+        {{ message }}
+    {% endfor %}
     {% if request.user.is_authenticated %}
         <form action="{% url 'accounts:logout-cbv' %}" method="post">
             {% csrf_token %}

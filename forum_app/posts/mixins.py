@@ -12,14 +12,15 @@ class ReadOnlyMixin:
             self.fields[field].disabled = True
 
 class TimeRestrictedMixin:
-    start_time = None
-    end_time = None
-    error_message = "Access restricted during those hours."
-
-    def dispatch(self, request, *args, **kwargs):
-        # current_time = datetime.now().time()
-        current_time = localtime().time()
-
-        if not (self.start_time <= current_time <= self.end_time):
-            return HttpResponseForbidden(self.error_message)
-        return super().dispatch(request, *args, **kwargs)
+    ...
+    # start_time = None
+    # end_time = None
+    # error_message = "Access restricted during those hours."
+    #
+    # def dispatch(self, request, *args, **kwargs):
+    #     # current_time = datetime.now().time()
+    #     current_time = localtime().time()
+    #
+    #     if not (self.start_time <= current_time <= self.end_time):
+    #         return HttpResponseForbidden(self.error_message)
+    #     return super().dispatch(request, *args, **kwargs)

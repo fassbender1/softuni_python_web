@@ -30,6 +30,9 @@ from posts.models import Post
 #     def post(self, request:HttpRequest) -> HttpResponse:
 #         ...
 
+def view_counter(request):
+    ...
+
 class IndexView(TemplateView):
     template_name = 'index.html'
     # extra_context = {

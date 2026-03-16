@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Choose Language{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white text-center">
+                <h2 class="h5 mb-0">Select Your Language</h2>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="language" class="form-label">Language</label>
+                        <select name="language" id="language" class="form-select">
+                            {% for code, name in supported_languages.items %}
+                                <option value="{{ code }}" {% if code == current_language %}selected{% endif %}>
+                                    {{ name }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">Save Preference</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,8 +1,9 @@
+
 <div class="card">
     <div class="top">
         <!-- User Details and image location -->
         <div class="userDetails">
-            <a href="profile details">
+            <a href="{% url 'accounts:details' request.user.pk %}">
                 <div class="profilepic">
                     <div class="profile_img">
                         <div class="image">
@@ -12,8 +13,9 @@
                 </div>
             </a>
             <h3>
-                <a href="profile details">
-                    Diyan Kalaydzhiev
+                <a href="{% url 'accounts:details' request.user.pk %}">
+                    <!-- if user has first name and last name -->
+                    {{ request.user.profile.get_full_name }}
                     <!-- else -->
                     <!-- user username -->
                 </a>
@@ -21,15 +23,15 @@
                 <!-- if the photo has location -->
                 <span>{{ photo.location }}</span>
             </h3>
-            {% if editable %}
+            {% if editable and request.user == photo.user %}
                 <div class="edit-delete-btns">
-
+    
                     <!-- Link to Edit Pet Photo Page -->
                     <a href="{% url 'photos:edit' photo.pk %}">
                         <img class="edit-img" src="/static/images/edit-pen-icon-6.jpg"
                              alt="edit button">
                     </a>
-
+    
                     <!-- Link to Delete Pet Photo Page -->
                     <a href="{% url 'photos:delete' photo.pk %}">
                         <img class="bin-img" src="/static/images/icon-remove-22.jpg" alt="bin button">
@@ -51,7 +53,7 @@
             <div class="left">
                     <span class="heart">
                         <a href="{% url 'common:like' photo.pk %}">
-                            {% if photo.like_set.count %}
+                            {% if photo.is_liked_by_user %}
                                 <i class="fa-solid fa-heart" style="color: #ed4040;"></i>
                             {% else %}
                                 <i class="fa-regular fa-heart"></i>
@@ -68,9 +70,9 @@
         <a href="#">
             <p class="likes">{{ photo.like_set.count }} likes</p>
         </a>
-
+        
         {% for tagged_pet in photo.tagged_pets.all %}
-            <a href="{% url 'pets:details' 'username' tagged_pet.slug %}">
+            <a href="{% url 'pets:details' username='username' pet_slug=tagged_pet.slug %}">
                 <p class="message">
                     <b>{{ tagged_pet.name }}</b>
                 </p>
@@ -82,7 +84,7 @@
         </a>
 
         <h5 class="postTime">{{ photo.date_of_publication }}</h5>
-
+    
         {% if editable %}
            {% for comment in photo.comment_set.all %}
             <div class="comments">
@@ -100,7 +102,7 @@
                                 <p>
                                     <!-- Link to User Profile Details Page-->
                                     <!-- User First and/or Last Name or username-->
-                                    <a href="">Steven Ivanov</a>
+                                    <a href="">{{ request.user.profile.get_full_name }}</a>
                                     <!-- User Comment -->
                                     - {{ comment.text }}
                                 </p>

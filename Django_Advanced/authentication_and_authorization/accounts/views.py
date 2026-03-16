@@ -1,5 +1,6 @@
+from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, get_user_model
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin, UserPassesTestMixin
 from django.http import HttpRequest, HttpResponse
@@ -7,6 +8,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, CreateView
 
+from accounts.forms import CustomUserCreationForm, SetUnusablePasswordForm
 
 # Create your views here
 # @login_required
@@ -53,7 +55,7 @@ def logout_fbv(request: HttpRequest):
     return redirect('home')
 
 class RegisterView(UserPassesTestMixin, CreateView):
-    form_class = UserCreationForm
+    form_class = CustomUserCreationForm
     model = UserModel
     template_name = 'accounts/register.html'
     success_url = reverse_lazy('home')
@@ -61,9 +63,29 @@ class RegisterView(UserPassesTestMixin, CreateView):
     def test_func(self):
         return not self.request.user.is_authenticated
 
-
-
 #LoginRequiredMixin
 class ProfileView(TemplateView):
     template_name = "accounts/profile_details.html"
 
+@login_required
+@permission_required('auth.can_set_unusable_password')
+def set_unusable_password(request: HttpRequest) -> HttpResponse:
+    form = SetUnusablePasswordForm(request.POST or None)
+
+    if request.method == 'POST' and form.is_valid():
+        selected_user = form.cleaned_data['user']
+
+        if selected_user.is_superuser:
+            messages.error(request, f"Cannot disable password for {selected_user.get_username()}")
+            return redirect('home')
+
+        selected_user.set_unusable_password()
+        selected_user.save(update_fields=['password'])
+        messages.success(
+            request,
+            f"Password disabled for {selected_user.get_username()}"
+        )
+
+        return redirect('home')
+
+    return render(request, 'accounts/set_unusable_password.html', {'form': form})

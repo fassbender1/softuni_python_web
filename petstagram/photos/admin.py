@@ -1,15 +1,12 @@
 from django.contrib import admin
-
-from pets.models import Pet
+from unfold.admin import ModelAdmin
 from photos.models import Photo
 
 
-# Register your models here.
-
 @admin.register(Photo)
-class PhotoAdmin(admin.ModelAdmin):
-    list_display = ('id', 'date_of_publication', 'description', 'get_tagged_pets')
+class PhotoAdmin(ModelAdmin):
+    list_display = ['id', 'description', 'date_of_publication', 'tagged_pets_list']
 
     @staticmethod
-    def get_tagged_pets(obj):
-        return ', '.join([pet.name for pet in obj.tagged_pets.all()])
+    def tagged_pets_list(obj) -> str:
+        return ', '.join(pet.name for pet in obj.tagged_pets.all())

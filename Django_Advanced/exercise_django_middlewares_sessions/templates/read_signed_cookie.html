@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Signed Cookie{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow-sm">
+            <div class="card-header bg-success text-white text-center">
+                <h3 class="h5 mb-0">Signed Cookie Verification</h3>
+            </div>
+            <div class="card-body text-center">
+                <p class="mb-4">
+                    The value of the <strong>role</strong> signed cookie is:
+                </p>
+                
+                {% if verified_value %}
+                    <div class="display-6 fw-bold {% if signature_valid %}text-success{% else %}text-danger{% endif %} mb-4">
+                        {{ verified_value }}
+                    </div>
+                    {% if signature_valid %}
+                        <div class="badge bg-success mb-4">Signature Valid</div>
+                    {% else %}
+                        <div class="badge bg-danger mb-4">Signature Invalid</div>
+                    {% endif %}
+                {% else %}
+                    <div class="alert alert-warning" role="alert">
+                        No signed cookie found or empty.
+                    </div>
+                {% endif %}
+
+                <div class="d-grid gap-2">
+                    <a href="{% url 'set-signed-cookie' %}" class="btn btn-primary">Set Signed Cookie (User)</a>
+                    <a href="{% url 'home' %}" class="btn btn-outline-secondary">Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

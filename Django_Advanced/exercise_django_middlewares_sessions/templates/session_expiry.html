@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Session Expiry{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow-sm">
+            <div class="card-header bg-warning text-dark text-center">
+                <h3 class="h5 mb-0">Session Expiry Management</h3>
+            </div>
+            <div class="card-body">
+                <p class="text-center mb-4">
+                    Current session expires in: 
+                    <span class="fw-bold text-primary">{{ remaining_seconds }} seconds</span>
+                </p>
+
+                {% if error_message %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error_message }}
+                    </div>
+                {% endif %}
+
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="expiry_seconds" class="form-label">Set New Expiry (seconds)</label>
+                        <input type="number" class="form-control" id="expiry_seconds" name="expiry_seconds" placeholder="e.g., 300" required min="1">
+                        <div class="form-text">Enter a positive number of seconds.</div>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Update Expiry</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

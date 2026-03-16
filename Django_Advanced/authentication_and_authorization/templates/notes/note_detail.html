@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ object.title }}</title>
+</head>
+<body>
+    <h1>{{ object.title }}</h1>
+    <p><strong>Owner:</strong> {{ object.owner.username }}</p>
+    <p><strong>Created at:</strong> {{ object.created_at }}</p>
+    <p>{{ object.body }}</p>
+    <a href="{% url 'notes:list' %}">Back to List</a>
+</body>
+</html>

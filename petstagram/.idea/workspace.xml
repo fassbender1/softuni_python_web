@@ -1,7 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0fc1f160-16e9-4e1f-8ec4-6e83e941e810" name="Changes" comment="" />
+    <list default="true" id="0fc1f160-16e9-4e1f-8ec4-6e83e941e810" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../Django_Advanced/authentication_and_authorization/accounts/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Django_Advanced/authentication_and_authorization/accounts/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Django_Advanced/authentication_and_authorization/accounts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Django_Advanced/authentication_and_authorization/accounts/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Django_Advanced/authentication_and_authorization/authentication_and_authorization/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Django_Advanced/authentication_and_authorization/authentication_and_authorization/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Django_Advanced/authentication_and_authorization/authentication_and_authorization/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Django_Advanced/authentication_and_authorization/authentication_and_authorization/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Django_Advanced/authentication_and_authorization/common/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Django_Advanced/authentication_and_authorization/common/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Django_Advanced/authentication_and_authorization/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/../Django_Advanced/authentication_and_authorization/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Django_Advanced/authentication_and_authorization/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Django_Advanced/authentication_and_authorization/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../forum_app/posts/mixins.py" beforeDir="false" afterPath="$PROJECT_DIR$/../forum_app/posts/mixins.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../forum_app/posts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../forum_app/posts/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/migrations/0002_rename_model_comment_alter_comment_options.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pets/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/pets/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pets/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/pets/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pets/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pets/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/pets/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pets/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/pets/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pets/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/pets/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/petstagram/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/petstagram/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/photos/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/photos/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/photos/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/photos/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/photos/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/photos/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/photos/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/photos/migrations/0002_alter_photo_tagged_pets.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/photos/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/photos/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/photos/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/photos/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/photos/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/photos/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/404.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/404.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/accounts/login-page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/accounts/login-page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/accounts/profile-details-page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/accounts/profile-details-page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/accounts/profile-edit-page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/accounts/profile-edit-page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/accounts/register-page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/accounts/register-page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/common/home-page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/common/home-page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/common/pet-posts.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/common/pet-posts.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/pets/pet-add-page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pets/pet-add-page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/pets/pet-delete-page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pets/pet-delete-page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/pets/pet-details-page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pets/pet-details-page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/pets/pet-edit-page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pets/pet-edit-page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/photos/photo-add-page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/photos/photo-add-page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/photos/photo-details-page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/photos/photo-details-page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/shared/nav.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/shared/nav.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,7 +71,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -44,30 +96,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Django Server.petstagram.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "ai.playground.ignore.import.keys.banner.in.settings": "true",
-    "django.template.preview.state": "SHOW_EDITOR",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/User/Desktop/SoftProjects/SoftUni_Python_Web/softuni_python_web/Django_Basics/petstagram",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Django Server.petstagram.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;ai.playground.ignore.import.keys.banner.in.settings&quot;: &quot;true&quot;,
+    &quot;django.template.preview.state&quot;: &quot;SHOW_EDITOR&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/Desktop/SoftProjects/SoftUni_Python_Web/softuni_python_web/Django_Basics/petstagram&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\User\Desktop\SoftProjects\SoftUni_Python_Web\softuni_python_web\petstagram\static\images" />
@@ -127,6 +179,7 @@
       <workItem from="1771120994448" duration="59000" />
       <workItem from="1771693295446" duration="3377000" />
       <workItem from="1772510236572" duration="114000" />
+      <workItem from="1773700022509" duration="2586000" />
     </task>
     <servers />
   </component>

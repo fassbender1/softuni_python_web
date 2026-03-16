@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Notes List</title>
+</head>
+<body>
+    <h1>Notes</h1>
+    <ul>
+        {% for note in object_list %}
+            <li>
+                <a href="{% url 'notes:detail' note.pk %}">{{ note.title }}</a>
+                {% if perms.notes.can_access_all_notes %}
+                    (Owner: {{ note.owner.username }})
+                {% endif %}
+            </li>
+        {% empty %}
+            <li>No notes available.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>

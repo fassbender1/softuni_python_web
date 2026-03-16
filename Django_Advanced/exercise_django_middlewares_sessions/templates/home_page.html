@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 text-center">
+        <div class="p-5 mb-4 bg-white rounded-3 shadow">
+            <div class="container-fluid py-5">
+                {% for lang_code, msg in greeting_message.items %}
+                    {% if lang_code == current_language %}
+                        <h1 class="display-4 fw-bold text-primary">{{ msg }}</h1>
+                    {% endif %}
+                {% endfor %}
+                <p class="col-md-8 fs-4 mx-auto text-muted mt-3">
+                    Welcome to our Django session management demo.
+                </p>
+                <a href="{% url 'choose-language' %}" class="btn btn-outline-primary btn-lg mt-3">Change Language</a>
+                </div>
+                <a href="{% url 'clear-session' %}">Clear Session</a>
+                <a href="{% url 'flush-session' %}">Flush Session</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
