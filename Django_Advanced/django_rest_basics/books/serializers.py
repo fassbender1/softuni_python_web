@@ -1,6 +1,11 @@
 from rest_framework import serializers
 from .models import Book
 
+# class BookSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Book
+#         fields = '__all__'
+
 class BookSerializer(serializers.ModelSerializer):
     title = serializers.CharField(
         max_length=200,

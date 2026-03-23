@@ -17,6 +17,13 @@ class HomeView(APIView):
     def get(self, request):
         return HttpResponse({"text": "Hello World"}, content_type='application/json')
 
+# class BookListCreateView(ListCreateAPIView):
+#     queryset = Book.objects.all()
+#     serializer_class = BookSerializer
+
+
+# below is same as above
+
 class BookListCreateView(APIView):
     def get(self, request: HttpRequest) -> HttpResponse:
         books = Book.objects.all()
@@ -29,3 +36,7 @@ class BookListCreateView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class BookDetailView(APIView):
+    def get(self, request: Request) -> Response:
+         book = get
